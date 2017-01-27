@@ -28,6 +28,20 @@ extension TestViewController : SCNavigationDataSource
 }
 ```
 
+Present Controller: (In AppDelegate)
+```
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+        
+        var window: UIWindow?
+        
+        self.window?.rootViewController? = TestViewController()
+        
+        self.window?.makeKeyAndVisible()
+        
+        return true
+    }
+```
 Move To Page :
 
 ```
