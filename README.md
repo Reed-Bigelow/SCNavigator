@@ -1,6 +1,8 @@
 # SCNavigator
 Remake of Snapchats new navigation Controller
 
+![](http://i.giphy.com/Su5XgdcfbVqcE.gif)
+
 Create ViewController : 
 ```
 class TestViewController: SCNavigatorViewController{
