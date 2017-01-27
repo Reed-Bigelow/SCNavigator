@@ -27,3 +27,15 @@ extension TestViewController : SCNavigationDataSource
     }
 }
 ```
+
+Move To Page :
+
+```
+class TestViewController: SCNavigatorViewController{
+    override func setupView() {
+        datasource = self
+        
+        self.MoveToPage(with: 1)
+    }
+}
+```
