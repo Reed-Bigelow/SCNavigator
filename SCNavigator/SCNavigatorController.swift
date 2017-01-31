@@ -22,7 +22,7 @@ import UIKit
     func ViewControllers()                    ->  [UIViewController]
     @objc optional func IndexOfStartingPage() ->  Int
     @objc optional func BackgroundColor()     ->  [UIColor]
-    @objc optional func MoveTo(with PageNumber: Int) // Left 0 : Right 1 : Bottom 2 : Top 3
+    @objc optional func MoveTo(with PageNumber: Int) // Left 0 : Right 1 : Bottom 2 : Top 3 : Center 4
 }
 
 enum VCPage : Int
@@ -111,14 +111,15 @@ open class SCNavigatorController: UIViewController{
     }
     
     //MARK : Scroll View and View Controllers
-    open var NavigationScrollView = UIScrollView()
-    open var LeftVC : UIViewController?
-    open var RightVC : UIViewController?
-    open var BottomVC :UIViewController?
-    open var TopVC : UIViewController?
-    fileprivate var LocalVCs : [UIViewController]!
-    fileprivate var CurrentVCs: [UIViewController]!
-    fileprivate var ScrollViewController = UIViewController()
+    open var NavigationScrollView           = UIScrollView()
+    open var LeftVC                         : UIViewController?
+    open var RightVC                        : UIViewController?
+    open var BottomVC                       : UIViewController?
+    open var TopVC                          : UIViewController?
+    open var CenterVC                       : UIViewController?
+    fileprivate var LocalVCs                : [UIViewController]!
+    fileprivate var CurrentVCs              : [UIViewController]!
+    fileprivate var ScrollViewController    = UIViewController()
     
     //MARK: Variables
     open weak var datasource: SCNavigationDataSource?
@@ -149,7 +150,7 @@ open class SCNavigatorController: UIViewController{
         
         LocalVCs = datasource?.ViewControllers()
         
-        guard self.LocalVCs != nil else {
+        guard self.LocalVCs.count > 4 else {
             print("Please Add View Controllers")
             return
         }
@@ -208,6 +209,16 @@ open class SCNavigatorController: UIViewController{
         self.TopVC?.view.backgroundColor = UIColor.white
         
         self.NavigationScrollView.addSubview((self.TopVC?.view)!)
+        
+        //Background VC
+        
+        self.CenterVC = (self.CurrentVCs[4])
+        
+        self.CenterVC?.view.frame = CGRect(x: 0, y: 0, width: constants.ScreenWidth, height: constants.ScreenHeight)
+        
+        self.view.addSubview((self.CenterVC?.view)!)
+        
+        self.view.sendSubview(toBack: (self.CenterVC?.view)!)
     }
     
     //MARK : SetUp Scroll View
@@ -222,8 +233,6 @@ open class SCNavigatorController: UIViewController{
         self.NavigationScrollView.autoresizingMask               = UIViewAutoresizing.flexibleWidth
         
         self.NavigationScrollView.autoresizingMask               = UIViewAutoresizing.flexibleHeight
-        
-        self.NavigationScrollView.backgroundColor                = UIColor.blue
         
         self.NavigationScrollView.delegate                       = self
         
