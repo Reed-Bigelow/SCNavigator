@@ -18,12 +18,13 @@ extension TestViewController : SCNavigationDataSource
 {
     public func ViewControllers() -> [UIViewController] {
     
-        let view1 = UIViewController()
-        let view2 = UIViewController()
-        let view3 = UIViewController()
-        let view4 = UIViewController()
+        let LeftVC      = UIViewController()
+        let RightVC     = UIViewController()
+        let BottomVC    = UIViewController()
+        let TopVC       = UIViewController()
+        let CenterVC    = UIViewController()
         
-        return [view1,view2,view3,view4]
+        return [LeftVC,RightVC,BottomVC,TopVC,CenterVC]
     }
 }
 ```
